@@ -1,5 +1,5 @@
 # STAGE 1: Compile and Build the Application
-FROM ://microsoft.com AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
 WORKDIR /app
 
 #Copy the project file and restore dependencies (Optimizes caching)
@@ -11,7 +11,7 @@ COPY src/ ./src/
 RUN dotnet publish ./src/*.csproj -c Release -o out
 
 # STAGE 2: Package the Optimized Runtime
-FROM ://microsoft.com
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 
 # Copy the compiled binaries from Stage 1 into our lightweight runtime image
