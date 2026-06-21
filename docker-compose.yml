@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  # 1. The Central Orchestrator: Your .NET Web API
+  web-api:
+    image: distributed-shortener-api:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: shortener_api_container
+    ports:
+      - "5000:8080"  # Access locally via http://localhost:5000
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - RedisConnection=redis-cache:6379
+      - MongoConnection=mongodb://db-user:db-pass@mongo-db:27017/
+    depends_on:
+      - redis-cache
+      - mongo-db
+
+  # 2. The Read Accelerator: Redis Distributed Cache
+  redis-cache:
+    image: redis:7.2-alpine
+    container_name: shortener_redis_container
+    ports:
+      - "6379:6379"
+
+  # 3. The Source of Truth: NoSQL Database (MongoDB)
+  mongo-db:
+    image: mongo:7.0
+    container_name: shortener_mongo_container
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=db-user
+      - MONGO_INITDB_ROOT_PASSWORD=db-pass
