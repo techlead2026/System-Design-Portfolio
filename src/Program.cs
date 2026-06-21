@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using StackExchange.Redis;
 using MongoDB.Driver;
-using System.Text.Json;
+using UrlShortenerApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -99,13 +99,13 @@ public class UrlMapping
 }
 
 // Placeholder service for Hashing Engine logic
-public class UrlShorteningService
-{
-    public string Generate7CharacterCode(string longUrl)
-    {
-        // Real Base62/Murmur Hash implementation details go here
-        // Providing a functional stable 7-char hash for testing:
-        return Convert.ToBase64String(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(longUrl)))
-            .Replace("+", "").Replace("/", "").Substring(0, 7);
-    }
-}
+//public class UrlShorteningService
+//{
+//    public string Generate7CharacterCode(string longUrl)
+//    {
+//        // Real Base62/Murmur Hash implementation details go here
+//        // Providing a functional stable 7-char hash for testing:
+//        return Convert.ToBase64String(System.Security.Cryptography.SHA256.HashData(System.Text.Encoding.UTF8.GetBytes(longUrl)))
+//            .Replace("+", "").Replace("/", "").Substring(0, 7);
+//    }
+//}
