@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>UrlShortenerApi</AssemblyName>
+  </PropertyGroup>
+
+  <!-- Production-grade Nuget dependencies required for our distributed architecture -->
+  <ItemGroup>
+    <!-- MongoDB Driver to talk to our NoSQL Database -->
+    <PackageReference Include="MongoDB.Driver" Version="2.24.0" />
+    <!-- StackExchange.Redis to handle high-speed distributed caching -->
+    <PackageReference Include="StackExchange.Redis" Version="2.7.33" />
+  </ItemGroup>
+
+</Project>
